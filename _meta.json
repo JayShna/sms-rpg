@@ -1,6 +1,5 @@
 {
-  "ownerId": "kn754zj09jgmxsqxy9ntdta9ah83ca61",
-  "slug": "sms-rpg",
-  "version": "1.2.6",
-  "publishedAt": 1776265224411
+  "name": "sms-rpg-instruction",
+  "version": "2.0.0",
+  "description": "文字冒险游戏引擎（指令式）- 零配置启动，无需API Key"
 }
