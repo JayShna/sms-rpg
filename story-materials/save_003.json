@@ -1,0 +1,207 @@
+{
+  "version": "2.0-instruction",
+  "savedAt": "2026-04-21T14:30:00+08:00",
+  "slot": 3,
+  "playerName": "大壮",
+  "worldRequirement": "穿越修仙世界，觉醒千倍返还系统，目标是广收道侣",
+  "narrativeStyle": "《鹿鼎记》风格——市井、机灵、有趣、通俗有人味",
+  "currentTurn": 18,
+  "worldState": {
+    "currentLocation": "青云宗内门·藏经阁",
+    "time": "午时",
+    "weather": "晴",
+    "atmosphere": "紧张，即将接受藏经阁考核",
+    "player": {
+      "name": "大壮",
+      "cultivationLevel": "外门弟子",
+      "hp": 150,
+      "maxHp": 150,
+      "mp": 80,
+      "maxMp": 80,
+      "gold": 400,
+      "reputation": {
+        "青云宗": 15
+      },
+      "activeEffects": [],
+      "inventory": ["青云基础剑法×1", "辟谷丹×3", "聚气散×2", "灵草种子×10", "《基础炼丹术》×1"]
+    },
+    "system": {
+      "name": "千倍返还系统",
+      "currentTask": "加入内门",
+      "daolus": ["苏清霜", "白露", "林婉儿"],
+      "totalGiftsGiven": 5,
+      "potentialTargets": [
+        {"name": "苏清霜", "description": "内门女弟子，已有好感", "status": "好感度上升中", "attitude": "友善"},
+        {"name": "白露", "description": "内门女弟子，活泼开朗", "status": "好感度上升", "attitude": "好奇"},
+        {"name": "林婉儿", "description": "杂役少女，被大壮帮助", "status": "感激", "attitude": "信任"},
+        {"name": "赵长老", "description": "藏经阁守阁长老", "status": "考验中", "attitude": "考验"}
+      ]
+    },
+    "locations": {
+      "青云宗外门杂役院": {
+        "id": "青云宗外门杂役院",
+        "name": "青云宗外门杂役院",
+        "description": "破旧的小院，杂役弟子的住处",
+        "connectedTo": ["青云宗内门", "青云宗外门"],
+        "presentNpcs": [],
+        "secrets": [],
+        "visited": true
+      },
+      "青云宗内门演武场": {
+        "id": "青云宗内门演武场",
+        "name": "青云宗内门演武场",
+        "description": "内门弟子修炼武技的广场",
+        "connectedTo": ["青云宗内门"],
+        "presentNpcs": ["苏清霜"],
+        "secrets": [],
+        "visited": true
+      },
+      "青云宗内门·藏经阁": {
+        "id": "青云宗内门·藏经阁",
+        "name": "青云宗内门·藏经阁",
+        "description": "存放功法秘籍的地方，需要通过考核才能进入",
+        "connectedTo": ["青云宗内门"],
+        "presentNpcs": ["赵长老"],
+        "secrets": ["有顶级功法"],
+        "visited": true
+      },
+      "青云宗灵药园": {
+        "id": "青云宗灵药园",
+        "name": "青云宗灵药园",
+        "description": "种植灵药的地方",
+        "connectedTo": ["青云宗外门"],
+        "presentNpcs": ["林婉儿"],
+        "secrets": ["有珍稀灵药"],
+        "visited": true
+      }
+    },
+    "npcs": {
+      "苏清霜": {
+        "id": "su_qingshuang",
+        "name": "苏清霜",
+        "description": "内门女弟子，气质清冷",
+        "faction": "青云宗内门",
+        "attitude": 55,
+        "status": "内门弟子，对大壮有好感",
+        "qualification": "上品",
+        "secret": "每日子时在后山禁地修炼冰属性功法"
+      },
+      "白露": {
+        "id": "bai_lu",
+        "name": "白露",
+        "description": "内门女弟子，活泼开朗",
+        "faction": "青云宗内门",
+        "attitude": 40,
+        "status": "内门弟子，对大壮很感兴趣",
+        "qualification": "良品"
+      },
+      "林婉儿": {
+        "id": "lin_waner",
+        "name": "林婉儿",
+        "description": "杂役少女，对大壮心存感激",
+        "faction": "青云宗杂役",
+        "attitude": 50,
+        "status": "在灵药园工作",
+        "qualification": "中品"
+      },
+      "赵长老": {
+        "id": "zhao_elder",
+        "name": "赵长老",
+        "description": "藏经阁守阁长老，须发皆白",
+        "faction": "青云宗",
+        "attitude": 0,
+        "status": "考验大壮",
+        "qualification": "非道侣目标"
+      },
+      "赵铁柱": {
+        "id": "zhao_tiezhu",
+        "name": "赵铁柱",
+        "description": "外门杂役，大壮的好兄弟",
+        "faction": "青云宗外门",
+        "attitude": 40,
+        "status": "在杂役院"
+      },
+      "孙虎": {
+        "id": "sun_hu",
+        "name": "孙虎",
+        "description": "杂役小霸王，被大壮教训过",
+        "faction": "青云宗杂役",
+        "attitude": -30,
+        "status": "怀恨在心"
+      }
+    },
+    "quests": [
+      {
+        "id": "main_001",
+        "title": "寻找道侣",
+        "type": "main",
+        "status": "active",
+        "objectives": ["攻略苏清霜、白露、林婉儿"]
+      },
+      {
+        "id": "main_002",
+        "title": "加入内门",
+        "type": "main",
+        "status": "active",
+        "objectives": ["通过藏经阁考核"]
+      },
+      {
+        "id": "side_001",
+        "title": "教训孙虎",
+        "type": "side",
+        "status": "completed",
+        "objectives": ["已完成"]
+      },
+      {
+        "id": "side_002",
+        "title": "学习炼丹",
+        "type": "side",
+        "status": "active",
+        "objectives": ["找林婉儿要灵药种子"]
+      }
+    ],
+    "relationships": {
+      "苏清霜": {
+        "type": "暧昧",
+        "level": 55,
+        "history": "后山相遇→赠花→公开课→一起修炼，好感度稳步上升"
+      },
+      "白露": {
+        "type": "好友",
+        "level": 40,
+        "history": "入门初识→演武场重逢→一起听课"
+      },
+      "林婉儿": {
+        "type": "感激+暗恋",
+        "level": 50,
+        "history": "救她于危难→赠送灵石→在灵药园照顾她"
+      },
+      "赵铁柱": {
+        "type": "兄弟",
+        "level": 40,
+        "history": "同院杂役→一起干活→好兄弟"
+      }
+    }
+  },
+  "turnHistory": [
+    {"turn": 1, "action": "穿越觉醒", "summary": "大壮穿越到修仙世界，觉醒千倍返还系统"},
+    {"turn": 2, "action": "入门", "summary": "混入入门队伍，与白露初识"},
+    {"turn": 3, "action": "后山相遇", "summary": "误入后山禁地，遇见苏清霜"},
+    {"turn": 4, "action": "赠花返还", "summary": "赠送野花触发千倍返还，获得500灵石和剑法"},
+    {"turn": 5, "action": "突破外门", "summary": "用灵石突破凡人境，成为外门弟子"},
+    {"turn": 6, "action": "公开课", "summary": "参加内门公开课，与苏清霜再遇"},
+    {"turn": 7, "action": "救林婉儿", "summary": "遇到林婉儿被欺负，出手相助"},
+    {"turn": 8, "action": "击败孙虎", "summary": "击败杂役头子孙虎"},
+    {"turn": 9, "action": "系统奖励", "summary": "助人行为触发千倍返还"},
+    {"turn": 10, "action": "公开课", "summary": "与苏清霜一起听课"},
+    {"turn": 11, "action": "送丹药", "summary": "送给苏清霜聚气散"},
+    {"turn": 12, "action": "再遇白露", "summary": "在内门遇到白露"},
+    {"turn": 13, "action": "帮助白露", "summary": "帮白露完成采集任务"},
+    {"turn": 14, "action": "灵药园", "summary": "去灵药园看林婉儿"},
+    {"turn": 15, "action": "告白苏清霜", "summary": "向苏清霜表白"},
+    {"turn": 16, "action": "藏经阁", "summary": "申请进入藏经阁"},
+    {"turn": 17, "action": "初试", "summary": "通过藏经阁初试"},
+    {"turn": 18, "action": "复试", "summary": "准备接受藏经阁复试"}
+  ],
+  "summary": "大壮穿越修仙世界，觉醒千倍返还系统。通过赠送礼物和帮助他人不断获得千倍返还奖励，修为快速提升。已与苏清霜、白露、林婉儿三位道侣候选人建立良好关系。当前正在接受藏经阁考核，准备加入内门。"
+}

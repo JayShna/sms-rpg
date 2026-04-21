@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS RPG - 对比冲击风封面</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1242px;
+            height: 1660px;
+            font-family: 'Noto Sans SC', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 顶部标题栏 */
+        .top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, #2C3E50 0%, #34495E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .highlight-text {
+            color: #F39C12;
+        }
+        
+        /* 对比区域 */
+        .comparison {
+            display: flex;
+            height: calc(100% - 200px);
+            margin-top: 200px;
+        }
+        
+        /* 左侧 - 普通AI */
+        .left-side {
+            flex: 1;
+            background: linear-gradient(135deg, #7F8C8D 0%, #95A5A6 100%);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .left-side::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 30px solid transparent;
+            border-bottom: 30px solid transparent;
+            border-right: 30px solid #C7EDCC;
+            z-index: 5;
+        }
+        
+        .side-label {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 4px;
+        }
+        
+        .chat-bubble {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chat-bubble.user {
+            background: rgba(44, 62, 80, 0.9);
+            color: #fff;
+            margin-left: 40px;
+        }
+        
+        .chat-bubble.ai {
+            margin-right: 40px;
+        }
+        
+        .chat-text {
+            font-size: 26px;
+            line-height: 1.5;
+            color: #2C3E50;
+        }
+        
+        .chat-bubble.user .chat-text {
+            color: #ECF0F1;
+        }
+        
+        .cross-mark {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 80px;
+            color: rgba(231, 76, 60, 0.8);
+            font-weight: 900;
+        }
+        
+        /* 右侧 - SMS RPG */
+        .right-side {
+            flex: 1;
+            background: linear-gradient(135deg, #C7EDCC 0%, #A8E6CF 100%);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .right-side .side-label {
+            color: #2C5F2D;
+        }
+        
+        .right-side .chat-bubble {
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .right-side .chat-bubble.user {
+            background: rgba(44, 95, 45, 0.9);
+        }
+        
+        .right-side .chat-text {
+            font-weight: 600;
+        }
+        
+        .highlight {
+            color: #D4AF37;
+            font-weight: 900;
+            font-size: 30px;
+        }
+        
+        .check-mark {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 80px;
+            color: rgba(39, 174, 96, 0.8);
+            font-weight: 900;
+        }
+        
+        /* 底部品牌 */
+        .brand-footer {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .brand {
+            font-size: 36px;
+            font-weight: 900;
+            color: #2C5F2D;
+            letter-spacing: 4px;
+        }
+        
+        /* VS 分隔符 */
+        .vs-divider {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 900;
+            color: #2C3E50;
+            z-index: 20;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 特效标签 */
+        .effect-tag {
+            position: absolute;
+            bottom: 100px;
+            right: 50px;
+            background: #D4AF37;
+            color: #FFF;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 24px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1 class="main-title">
+            同一个AI，<span class="highlight-text">差别这么大？</span>
+        </h1>
+    </div>
+    
+    <div class="comparison">
+        <!-- 左侧 - 普通AI -->
+        <div class="left-side">
+            <div class="cross-mark">×</div>
+            <div class="side-label">普通AI聊天</div>
+            <div class="chat-bubble user">
+                <p class="chat-text">帮我写代码</p>
+            </div>
+            <div class="chat-bubble ai">
+                <p class="chat-text">好的，请问您需要什么功能的代码？</p>
+            </div>
+            <div class="chat-bubble user">
+                <p class="chat-text">做一个登录页面</p>
+            </div>
+            <div class="chat-bubble ai">
+                <p class="chat-text">好的，这是一个基础的HTML登录页面...</p>
+            </div>
+        </div>
+        
+        <!-- 右侧 - SMS RPG -->
+        <div class="right-side">
+            <div class="check-mark">✓</div>
+            <div class="side-label">SMS RPG</div>
+            <div class="chat-bubble user">
+                <p class="chat-text">开始游戏</p>
+            </div>
+            <div class="chat-bubble ai">
+                <p class="chat-text">你穿越到修仙世界，<span class="highlight">千倍返还系统觉醒！</span></p>
+            </div>
+            <div class="chat-bubble user">
+                <p class="chat-text">送苏清霜一朵野花</p>
+            </div>
+            <div class="chat-bubble ai">
+                <p class="chat-text"><span class="highlight">千倍返还：500灵石 + 顶级剑法！</span></p>
+            </div>
+            <div class="effect-tag">投资道侣，稳赚不赔</div>
+        </div>
+    </div>
+    
+    <div class="vs-divider">VS</div>
+    
+    <div class="brand-footer">
+        <div class="brand">SMS RPG · 加载即玩</div>
+    </div>
+</body>
+</html>

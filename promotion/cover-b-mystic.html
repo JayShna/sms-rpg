@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS RPG - 神秘修仙风封面</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1242px;
+            height: 1660px;
+            background: linear-gradient(180deg, #0F0C29 0%, #302B63 50%, #24243E 100%);
+            font-family: 'Noto Sans SC', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 星光背景 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 160px 120px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.5;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 100px 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* 系统激活框 */
+        .system-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 3px solid #D4AF37;
+            border-radius: 30px;
+            padding: 80px 60px;
+            margin-bottom: 60px;
+            position: relative;
+            box-shadow: 
+                0 0 60px rgba(212, 175, 55, 0.3),
+                inset 0 0 60px rgba(212, 175, 55, 0.1);
+        }
+        
+        .system-box::before {
+            content: '【 系 统 觉 醒 】';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #302B63;
+            padding: 10px 40px;
+            font-size: 24px;
+            color: #D4AF37;
+            letter-spacing: 10px;
+            font-weight: 700;
+        }
+        
+        .system-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 88px;
+            color: #D4AF37;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+            letter-spacing: 8px;
+        }
+        
+        .system-desc {
+            font-size: 32px;
+            color: #C7EDCC;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .highlight {
+            color: #D4AF37;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+        
+        /* 金句区域 */
+        .quote-section {
+            margin: 50px 0;
+        }
+        
+        .quote {
+            font-size: 36px;
+            color: #C7EDCC;
+            font-style: italic;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        /* 底部信息 */
+        .bottom-section {
+            margin-top: 60px;
+        }
+        
+        .brand {
+            font-size: 48px;
+            font-weight: 900;
+            color: #C7EDCC;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .tagline {
+            font-size: 24px;
+            color: rgba(199, 237, 204, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        /* 装饰元素 */
+        .glow-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .glow-orb.top { top: -100px; left: -100px; }
+        .glow-orb.bottom { bottom: -100px; right: -100px; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        /* 流光效果 */
+        .light-beam {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, #D4AF37 50%, transparent 100%);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="glow-orb top"></div>
+    <div class="glow-orb bottom"></div>
+    <div class="light-beam"></div>
+    
+    <div class="container">
+        <div class="system-box">
+            <h1 class="system-title">千倍返还系统</h1>
+            <p class="system-desc">
+                送道侣礼物，获<span class="highlight">千倍返还</span><br>
+                投资道侣，稳赚不赔
+            </p>
+        </div>
+        
+        <div class="quote-section">
+            <p class="quote">"野花赠佳人，千倍返灵石！"</p>
+            <p class="quote">"一朵野花 → 500灵石 + 顶级剑法"</p>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="brand">SMS RPG</div>
+            <div class="tagline">你的武侠世界，由此开始</div>
+        </div>
+    </div>
+</body>
+</html>

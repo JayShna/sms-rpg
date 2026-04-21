@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS RPG - 小说阅读风</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1242px;
+            height: 1660px;
+            background-color: #FAF9DE;
+            font-family: 'Noto Serif SC', 'ZCOOL XiaoWei', 'SimSun', serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 古书卷边框 */
+        .book-border {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 3px solid #8B4513;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .book-border::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #D2691E;
+            border-radius: 4px;
+        }
+
+        /* 左侧装饰卷轴 */
+        .scroll-decoration {
+            position: absolute;
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 600px;
+            background: linear-gradient(90deg, #DEB887 0%, #F5DEB3 50%, #DEB887 100%);
+            border-radius: 12px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .scroll-decoration::before,
+        .scroll-decoration::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle, #8B4513 30%, #DEB887 70%);
+            border-radius: 50%;
+        }
+
+        .scroll-decoration::before {
+            top: -10px;
+        }
+
+        .scroll-decoration::after {
+            bottom: -10px;
+        }
+
+        /* 顶部装饰 */
+        .top-decoration {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .top-decoration::before {
+            content: '❀';
+            font-size: 28px;
+            color: #8B4513;
+            letter-spacing: 30px;
+        }
+
+        /* 主标题 */
+        .main-title {
+            position: absolute;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 88px;
+            font-weight: 900;
+            color: #3D2914;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 8px;
+            white-space: nowrap;
+        }
+
+        .main-title::before,
+        .main-title::after {
+            content: '「';
+            font-size: 60px;
+            color: #8B4513;
+            margin: 0 10px;
+        }
+
+        .main-title::after {
+            content: '」';
+        }
+
+        /* 副标题 */
+        .subtitle {
+            position: absolute;
+            top: 320px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 38px;
+            color: #6B4423;
+            letter-spacing: 6px;
+        }
+
+        /* 分隔线 */
+        .divider {
+            position: absolute;
+            top: 420px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8B4513, transparent);
+        }
+
+        /* 核心卖点区域 */
+        .highlight-box {
+            position: absolute;
+            top: 480px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #C7EDCC 0%, #A8E6CF 100%);
+            padding: 35px 60px;
+            border-radius: 20px;
+            border: 3px solid #228B22;
+            box-shadow: 0 8px 25px rgba(34, 139, 34, 0.3);
+        }
+
+        .highlight-text {
+            font-size: 52px;
+            font-weight: 700;
+            color: #1B5E20;
+            text-align: center;
+            letter-spacing: 4px;
+        }
+
+        /* 剧情片段区域 */
+        .story-section {
+            position: absolute;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            text-align: center;
+        }
+
+        .story-label {
+            font-size: 28px;
+            color: #8B4513;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+        }
+
+        .story-content {
+            background: linear-gradient(to bottom, #FAF9DE, #F5E6C8);
+            border: 2px solid #D2691E;
+            border-radius: 12px;
+            padding: 40px 50px;
+            box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.1);
+        }
+
+        .story-quote {
+            font-size: 36px;
+            color: #4A3728;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .story-result {
+            font-size: 42px;
+            color: #228B22;
+            font-weight: 700;
+            margin-top: 25px;
+        }
+
+        /* 底部标签 */
+        .bottom-tag {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 15px 50px;
+            border-radius: 30px;
+            font-size: 32px;
+            font-weight: 700;
+            color: #5D4037;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* 装饰元素 */
+        .corner-decor {
+            position: absolute;
+            font-size: 40px;
+            color: #8B4513;
+            opacity: 0.6;
+        }
+
+        .corner-decor.top-left { top: 100px; left: 120px; }
+        .corner-decor.top-right { top: 100px; right: 120px; }
+        .corner-decor.bottom-left { bottom: 150px; left: 120px; }
+        .corner-decor.bottom-right { bottom: 150px; right: 120px; }
+
+        /* 底部水印 */
+        .watermark {
+            position: absolute;
+            bottom: 25px;
+            right: 80px;
+            font-size: 20px;
+            color: #8B4513;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- 古书边框 -->
+    <div class="book-border"></div>
+    
+    <!-- 左侧卷轴装饰 -->
+    <div class="scroll-decoration"></div>
+    
+    <!-- 顶部装饰 -->
+    <div class="top-decoration"></div>
+    
+    <!-- 角落装饰 -->
+    <span class="corner-decor top-left">☘</span>
+    <span class="corner-decor top-right">☘</span>
+    <span class="corner-decor bottom-left">☘</span>
+    <span class="corner-decor bottom-right">☘</span>
+    
+    <!-- 主标题 -->
+    <h1 class="main-title">我让AI写了一个武侠世界</h1>
+    
+    <!-- 副标题 -->
+    <p class="subtitle">加载即玩，5秒开始冒险</p>
+    
+    <!-- 分隔线 -->
+    <div class="divider"></div>
+    
+    <!-- 核心卖点 -->
+    <div class="highlight-box">
+        <p class="highlight-text">🌿 千倍返还系统</p>
+    </div>
+    
+    <!-- 剧情片段 -->
+    <div class="story-section">
+        <p class="story-label">—— 剧情片段 ——</p>
+        <div class="story-content">
+            <p class="story-quote">"我随手给了路边姑娘一朵野花..."</p>
+            <p class="story-result">🌸 一朵野花 → 500灵石 + 顶级剑法！</p>
+        </div>
+    </div>
+    
+    <!-- 底部标签 -->
+    <div class="bottom-tag">SMS RPG · 文字冒险游戏引擎</div>
+    
+    <!-- 水印 -->
+    <p class="watermark">sms-rpg.engine</p>
+</body>
+</html>

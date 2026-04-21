@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS RPG - 对比冲击风封面 V2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1242px;
+            height: 1660px;
+            font-family: 'Noto Sans SC', sans-serif;
+            overflow: hidden;
+            position: relative;
+            background: #f5f5f5;
+        }
+        
+        /* 顶部标题栏 */
+        .header-bar {
+            position: relative;
+            height: 240px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-bar::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #95a5a6 0%, 
+                #95a5a6 45%, 
+                #C7EDCC 55%, 
+                #C7EDCC 100%
+            );
+        }
+        
+        .main-title {
+            font-size: 58px;
+            font-weight: 900;
+            color: #FFFFFF;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+        
+        .main-title .highlight {
+            color: #D4AF37;
+            position: relative;
+        }
+        
+        .main-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: rgba(212, 175, 55, 0.3);
+            z-index: -1;
+        }
+        
+        /* 对比容器 */
+        .comparison-container {
+            display: flex;
+            height: calc(100% - 240px);
+            position: relative;
+        }
+        
+        /* 左侧 - 普通AI */
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(180deg, #ecf0f1 0%, #bdc3c7 100%);
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .panel-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        .left-panel .panel-icon {
+            background: rgba(149, 165, 166, 0.3);
+            color: #7f8c8d;
+        }
+        
+        .panel-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #7f8c8d;
+            letter-spacing: 2px;
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .left-panel .status-badge {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            border: 2px solid rgba(231, 76, 60, 0.3);
+        }
+        
+        /* 对话气泡 */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .chat-bubble {
+            max-width: 85%;
+            padding: 25px 35px;
+            border-radius: 24px;
+            position: relative;
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-bubble.user {
+            align-self: flex-end;
+            background: #7f8c8d;
+            color: #fff;
+            border-bottom-right-radius: 8px;
+        }
+        
+        .chat-bubble.ai {
+            align-self: flex-start;
+            background: #fff;
+            color: #2c3e50;
+            border-bottom-left-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .chat-text {
+            font-size: 26px;
+            line-height: 1.6;
+        }
+        
+        .chat-text.dim {
+            color: rgba(127, 140, 141, 0.8);
+            font-size: 24px;
+        }
+        
+        /* 右侧 - SMS RPG */
+        .right-panel {
+            flex: 1;
+            background: linear-gradient(180deg, #C7EDCC 0%, #A8E6CF 100%);
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .right-panel .panel-icon {
+            background: rgba(44, 95, 45, 0.2);
+            color: #2C5F2D;
+        }
+        
+        .right-panel .panel-title {
+            color: #2C5F2D;
+        }
+        
+        .right-panel .status-badge {
+            background: rgba(39, 174, 96, 0.15);
+            color: #27ae60;
+            border: 2px solid rgba(39, 174, 96, 0.4);
+        }
+        
+        .right-panel .chat-bubble.user {
+            background: #2C5F2D;
+        }
+        
+        .right-panel .chat-bubble.ai {
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(44, 95, 45, 0.15);
+        }
+        
+        .chat-text.highlight {
+            color: #D4AF37;
+            font-weight: 700;
+            font-size: 28px;
+        }
+        
+        .chat-text.emphasis {
+            font-weight: 600;
+        }
+        
+        /* 特效标签 */
+        .effect-tag {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #D4AF37 0%, #F4CF47 100%);
+            color: #FFF;
+            border-radius: 30px;
+            font-size: 26px;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+            white-space: nowrap;
+        }
+        
+        /* VS 分隔符 */
+        .vs-divider {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: 900;
+            color: #2c3e50;
+            z-index: 20;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 3px solid #fff;
+        }
+        
+        /* 底部品牌 */
+        .footer-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(135deg, #2C5F2D 0%, #3A7A3C 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .footer-text {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 6px;
+        }
+        
+        .footer-text .dot {
+            color: #D4AF37;
+            margin: 0 15px;
+        }
+        
+        /* 装饰元素 */
+        .decoration-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .decoration-dots .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        
+        .left-panel .decoration-dots .dot {
+            background: rgba(127, 140, 141, 0.4);
+        }
+        
+        .right-panel .decoration-dots .dot {
+            background: rgba(44, 95, 45, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <h1 class="main-title">同一个AI，<span class="highlight">差别这么大？</span></h1>
+    </div>
+    
+    <div class="comparison-container">
+        <!-- 左侧 - 普通AI -->
+        <div class="left-panel">
+            <div class="decoration-dots">
+                <div class="dot" style="left: 10%; top: 15%;"></div>
+                <div class="dot" style="left: 30%; top: 45%;"></div>
+                <div class="dot" style="left: 70%; top: 25%;"></div>
+                <div class="dot" style="left: 85%; top: 65%;"></div>
+            </div>
+            
+            <div class="panel-header">
+                <div class="panel-icon">AI</div>
+                <div class="panel-title">普通AI聊天</div>
+            </div>
+            
+            <div class="status-badge">无聊</div>
+            
+            <div class="chat-area">
+                <div class="chat-bubble user">
+                    <div class="chat-text">帮我写代码</div>
+                </div>
+                <div class="chat-bubble ai">
+                    <div class="chat-text dim">好的，请问您需要什么功能？</div>
+                </div>
+                <div class="chat-bubble user">
+                    <div class="chat-text">做个登录页面</div>
+                </div>
+                <div class="chat-bubble ai">
+                    <div class="chat-text dim">好的，这是一个基础的HTML...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧 - SMS RPG -->
+        <div class="right-panel">
+            <div class="decoration-dots">
+                <div class="dot" style="left: 15%; top: 20%;"></div>
+                <div class="dot" style="left: 35%; top: 55%;"></div>
+                <div class="dot" style="left: 75%; top: 30%;"></div>
+                <div class="dot" style="left: 90%; top: 60%;"></div>
+            </div>
+            
+            <div class="panel-header">
+                <div class="panel-icon">S</div>
+                <div class="panel-title">SMS RPG</div>
+            </div>
+            
+            <div class="status-badge">精彩</div>
+            
+            <div class="chat-area">
+                <div class="chat-bubble user">
+                    <div class="chat-text">开始游戏</div>
+                </div>
+                <div class="chat-bubble ai">
+                    <div class="chat-text emphasis">你穿越到修仙世界，<span class="highlight">千倍返还系统觉醒！</span></div>
+                </div>
+                <div class="chat-bubble user">
+                    <div class="chat-text">送苏清霜一朵野花</div>
+                </div>
+                <div class="chat-bubble ai">
+                    <div class="chat-text highlight">千倍返还：500灵石 + 顶级剑法！</div>
+                </div>
+            </div>
+            
+            <div class="effect-tag">投资道侣，稳赚不赔</div>
+        </div>
+        
+        <div class="vs-divider">VS</div>
+    </div>
+    
+    <div class="footer-bar">
+        <div class="footer-text">SMS RPG<span class="dot">·</span>加载即玩<span class="dot">·</span>开始冒险</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS RPG - 产品演示动画</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1080px;
+            height: 1920px;
+            background: #0a0a0a;
+            font-family: 'Noto Sans SC', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 场景容器 */
+        .scene {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .scene.active {
+            opacity: 1;
+        }
+        
+        /* ===== 场景1：黑屏开场 ===== */
+        #scene1 {
+            background: #000;
+        }
+        
+        #scene1 .text {
+            font-size: 56px;
+            color: #C7EDCC;
+            text-align: center;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        #scene1 .subtext {
+            font-size: 32px;
+            color: rgba(199, 237, 204, 0.6);
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+        
+        /* ===== 场景2：系统觉醒 ===== */
+        #scene2 {
+            background: linear-gradient(180deg, #0F0C29 0%, #302B63 50%, #24243E 100%);
+        }
+        
+        .system-frame {
+            width: 900px;
+            padding: 80px 60px;
+            border: 4px solid #D4AF37;
+            border-radius: 40px;
+            background: rgba(212, 175, 55, 0.1);
+            text-align: center;
+            position: relative;
+            box-shadow: 
+                0 0 80px rgba(212, 175, 55, 0.5),
+                inset 0 0 80px rgba(212, 175, 55, 0.1);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 80px rgba(212, 175, 55, 0.5), inset 0 0 80px rgba(212, 175, 55, 0.1); }
+            50% { box-shadow: 0 0 120px rgba(212, 175, 55, 0.8), inset 0 0 100px rgba(212, 175, 55, 0.2); }
+        }
+        
+        .system-label {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #302B63;
+            padding: 15px 50px;
+            font-size: 28px;
+            color: #D4AF37;
+            letter-spacing: 15px;
+            font-weight: 700;
+        }
+        
+        .system-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 100px;
+            color: #D4AF37;
+            margin-bottom: 40px;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.8);
+            animation: textGlow 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
+            50% { text-shadow: 0 0 60px rgba(212, 175, 55, 1), 0 0 80px rgba(212, 175, 55, 0.6); }
+        }
+        
+        .system-desc {
+            font-size: 38px;
+            color: #C7EDCC;
+            line-height: 1.8;
+        }
+        
+        .system-desc .gold {
+            color: #D4AF37;
+            font-weight: 700;
+        }
+        
+        /* ===== 场景3：剧情对话 ===== */
+        #scene3 {
+            background: linear-gradient(135deg, #FAF9DE 0%, #F5F4E1 100%);
+            padding: 100px 60px;
+        }
+        
+        .story-container {
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .story-header {
+            font-size: 42px;
+            color: #2C5F2D;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+            letter-spacing: 4px;
+        }
+        
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .chat-msg {
+            display: flex;
+            gap: 20px;
+            animation: slideInLeft 0.5s ease-out;
+        }
+        
+        .chat-msg.right {
+            flex-direction: row-reverse;
+            animation: slideInRight 0.5s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #C7EDCC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #2C5F2D;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .chat-msg.right .avatar {
+            background: #D4AF37;
+            color: #FFF;
+        }
+        
+        .chat-bubble {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 700px;
+        }
+        
+        .chat-msg.right .chat-bubble {
+            background: rgba(199, 237, 204, 0.5);
+        }
+        
+        .chat-name {
+            font-size: 24px;
+            color: #7F8C7F;
+            margin-bottom: 10px;
+        }
+        
+        .chat-text {
+            font-size: 32px;
+            color: #2C3E50;
+            line-height: 1.6;
+        }
+        
+        .highlight-gold {
+            color: #D4AF37;
+            font-weight: 700;
+            font-size: 36px;
+        }
+        
+        /* ===== 场景4：千倍返还特效 ===== */
+        #scene4 {
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000 100%);
+        }
+        
+        .effect-container {
+            text-align: center;
+        }
+        
+        .effect-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            animation: zoomIn 0.5s ease-out;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .effect-from {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: line-through;
+        }
+        
+        .effect-arrow {
+            font-size: 60px;
+            color: #D4AF37;
+            animation: arrowBounce 0.8s ease-in-out infinite;
+        }
+        
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+        
+        .effect-to {
+            font-size: 56px;
+            color: #D4AF37;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+            animation: goldGlow 1s ease-in-out infinite;
+        }
+        
+        @keyframes goldGlow {
+            0%, 100% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8); }
+            50% { text-shadow: 0 0 50px rgba(212, 175, 55, 1), 0 0 80px rgba(212, 175, 55, 0.6); }
+        }
+        
+        .effect-multiplier {
+            font-size: 80px;
+            color: #D4AF37;
+            font-weight: 900;
+            margin: 60px 0 40px;
+            animation: pulse 0.8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* ===== 场景5：结尾品牌 ===== */
+        #scene5 {
+            background: linear-gradient(180deg, #0F0C29 0%, #302B63 100%);
+        }
+        
+        .ending-container {
+            text-align: center;
+        }
+        
+        .brand-large {
+            font-size: 120px;
+            font-weight: 900;
+            color: #C7EDCC;
+            letter-spacing: 12px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .tagline-large {
+            font-size: 48px;
+            color: rgba(199, 237, 204, 0.8);
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 30px 80px;
+            background: #D4AF37;
+            color: #FFF;
+            font-size: 42px;
+            font-weight: 700;
+            border-radius: 50px;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* 动画通用 */
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* 粒子效果 */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #D4AF37;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 场景1：黑屏开场 -->
+    <div id="scene1" class="scene active">
+        <div class="text">穿越修仙世界...</div>
+        <div class="subtext">一个社畜的命运即将改变</div>
+    </div>
+    
+    <!-- 场景2：系统觉醒 -->
+    <div id="scene2" class="scene">
+        <div class="particles">
+            <div class="particle" style="left: 20%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 0.5s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+        </div>
+        <div class="system-frame">
+            <div class="system-label">系统觉醒</div>
+            <h1 class="system-title">千倍返还</h1>
+            <p class="system-desc">
+                送道侣礼物，获<span class="gold">千倍返还</span><br>
+                投资道侣，稳赚不赔
+            </p>
+        </div>
+    </div>
+    
+    <!-- 场景3：剧情对话 -->
+    <div id="scene3" class="scene">
+        <div class="story-container">
+            <div class="story-header">后山邂逅</div>
+            <div class="chat-container">
+                <div class="chat-msg">
+                    <div class="avatar">大</div>
+                    <div class="chat-bubble">
+                        <div class="chat-name">大壮</div>
+                        <div class="chat-text">（递上一朵路边的野花）师姐，这是给你的。</div>
+                    </div>
+                </div>
+                <div class="chat-msg right">
+                    <div class="avatar">霜</div>
+                    <div class="chat-bubble">
+                        <div class="chat-name">苏清霜</div>
+                        <div class="chat-text">...一朵野花？</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 场景4：千倍返还特效 -->
+    <div id="scene4" class="scene">
+        <div class="effect-container">
+            <div class="effect-multiplier">×1000</div>
+            <div class="effect-item">
+                <div class="effect-from">一朵野花</div>
+                <div class="effect-arrow">→</div>
+                <div class="effect-to">500灵石 + 顶级剑法</div>
+            </div>
+            <div class="effect-item" style="animation-delay: 0.3s;">
+                <div class="effect-from">普通丹药</div>
+                <div class="effect-arrow">→</div>
+                <div class="effect-to">仙品丹药 ×1000</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 场景5：结尾品牌 -->
+    <div id="scene5" class="scene">
+        <div class="ending-container">
+            <div class="brand-large">SMS RPG</div>
+            <div class="tagline-large">你的武侠世界，由此开始</div>
+            <div class="cta-button">加载即玩</div>
+        </div>
+    </div>
+    
+    <script>
+        // 动画时间轴
+        const timeline = [
+            { scene: 1, duration: 2000 },
+            { scene: 2, duration: 3000 },
+            { scene: 3, duration: 2500 },
+            { scene: 4, duration: 2500 },
+            { scene: 5, duration: 3000 }
+        ];
+        
+        let currentScene = 0;
+        
+        function playScene() {
+            // 隐藏所有场景
+            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+            
+            // 显示当前场景
+            const sceneData = timeline[currentScene];
+            document.getElementById('scene' + sceneData.scene).classList.add('active');
+            
+            // 下一场景
+            currentScene = (currentScene + 1) % timeline.length;
+            
+            setTimeout(playScene, sceneData.duration);
+        }
+        
+        // 开始播放
+        setTimeout(playScene, 500);
+    </script>
+</body>
+</html>
